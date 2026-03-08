@@ -45,21 +45,19 @@ export const getTopics = async (req, res) => {
   try {
     const { type } = req.query;
 
-    if (!type) {
-      return res.status(400).json({
-        success: false,
-        message: "Type is required",
-      });
-    }
-
     const topics = await OneLiner.aggregate([
       { $match: { type } },
+
+      // sort notes inside topic
+      { $sort: { order: 1 } },
+
       {
         $group: {
           _id: "$topic",
-          order: { $first: "$order" },
+          order: { $min: "$order" }, // safer than $first
         },
       },
+
       { $sort: { order: 1 } },
     ]);
 
