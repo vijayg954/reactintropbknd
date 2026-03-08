@@ -17,7 +17,7 @@ export const createOneLiner = async (req, res) => {
   }
 };
 
-// Get by type
+// Get questions by topic
 export const getOneLiners = async (req, res) => {
   try {
     const { type, topic } = req.query;
@@ -41,6 +41,7 @@ export const getOneLiners = async (req, res) => {
   }
 };
 
+// Get Topics
 export const getTopics = async (req, res) => {
   try {
     const { type } = req.query;
@@ -48,13 +49,12 @@ export const getTopics = async (req, res) => {
     const topics = await OneLiner.aggregate([
       { $match: { type } },
 
-      // sort notes inside topic
       { $sort: { order: 1 } },
 
       {
         $group: {
           _id: "$topic",
-          order: { $min: "$order" }, // safer than $first
+          order: { $min: "$order" },
         },
       },
 
@@ -63,7 +63,7 @@ export const getTopics = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      topics: topics.map(t => t._id),
+      topics,
     });
   } catch (error) {
     res.status(500).json({
