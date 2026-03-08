@@ -7,6 +7,7 @@ const oneLinerSESchema = new mongoose.Schema(
     },
     topic: {
       type: String,
+      required: true,
     },
     question: {
       type: String,
@@ -16,10 +17,10 @@ const oneLinerSESchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // order: {
-    //   type: Number,
-    //   required: true,
-    // },
+    order: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );
