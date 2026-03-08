@@ -16,10 +16,10 @@ const oneLinerSESchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    order: {
-      type: Number,
-      required: true,
-    },
+    // order: {
+    //   type: Number,
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );
