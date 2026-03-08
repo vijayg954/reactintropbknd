@@ -7,7 +7,6 @@ const oneLinerSESchema = new mongoose.Schema(
     },
     topic: {
       type: String,
-      required: true,
     },
     question: {
       type: String,
